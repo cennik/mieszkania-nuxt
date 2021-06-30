@@ -48,7 +48,7 @@ export default {
     // module options
     sockets: [{
       name: 'main',
-      url: 'http://etiaro.tk:12345'
+      url: 'http://localhost:12345'
     }]
   },
 
@@ -76,5 +76,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  server: {
+    port: 2137,
   }
 }
