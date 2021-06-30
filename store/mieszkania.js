@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export const state = () => ({
   mieszkania: {}
 })
@@ -7,7 +9,7 @@ export const mutations = {
     state.mieszkania = payload
   },
   setOne(state, payload) {
-    state.mieszkania[payload.url] = payload
+    Vue.set(state.mieszkania, payload.url, payload)
   }
 }
 

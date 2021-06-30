@@ -30,7 +30,6 @@ export default {
       mieszkaniaRaw: 'mieszkania/mieszkania',
     }),
     mieszkania() {
-      console.log(this.mieszkaniaRaw)
       return Object.values(this.mieszkaniaRaw)
     },
   },

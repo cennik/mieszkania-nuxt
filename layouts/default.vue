@@ -15,9 +15,15 @@ export default {
       msg.forEach((e) => (tmp[e[0]] = e[1]))
       this.setAll(tmp)
     })
+    this.socket.on('update', (msg) => {
+      this.setOne(msg)
+    })
+    this.socket.on('add', (msg) => {
+      this.setOne(msg)
+    })
   },
   methods: {
-    ...mapMutations('mieszkania', ['setAll']),
+    ...mapMutations('mieszkania', ['setAll', 'setOne']),
   },
 }
 </script>
