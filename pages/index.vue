@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     goodColor() {
-      return this.good ? 'green' : ''
+      return this.good ? '#00cc00' : ''
     },
     waitingColor() {
       return this.waiting ? 'grey' : ''
