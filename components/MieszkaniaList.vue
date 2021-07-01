@@ -81,7 +81,7 @@ export default {
         if (m.PWtime) str += m.PWtime + 'min, '
         str += '), '
       }
-      if (m.PWdist || m.PWtime) {
+      if (m.MiMdist || m.MiMtime) {
         str += 'MiM: ('
         if (m.MiMdist) str += m.MiMdist + 'km, '
         if (m.MiMtime) str += m.MiMtime + 'min, '
