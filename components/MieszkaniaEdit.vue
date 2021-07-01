@@ -127,7 +127,7 @@ export default {
     },
   },
   data() {
-    const nM = { rating: {}, ...this.mieszkanie }
+    const nM = { ...this.mieszkanie, rating: { ...this.mieszkanie.rating } }
     return {
       visible: false,
       newMieszkanie: nM,
@@ -140,6 +140,7 @@ export default {
   methods: {
     getShopName() {
       if (this.mieszkanie.shopId === 0) return 'Szybko.pl'
+      if (this.mieszkanie.shopId === 1) return 'olx.pl'
       return 'Nieznany sklep'
     },
     cancel() {
