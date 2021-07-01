@@ -58,6 +58,15 @@
         clearable
       ></v-select>
       <v-select
+        v-model="newMieszkanie.furnished"
+        :items="boolItems"
+        item-text="name"
+        item-value="val"
+        label="Umeblowane"
+        outlined
+        clearable
+      ></v-select>
+      <v-select
         v-model="newMieszkanie.balcony"
         :items="boolItems"
         item-text="name"

@@ -6,13 +6,25 @@
       class="element"
       :class="{ good: m.state == 1, bin: m.state == -1 }"
     >
-      <a :href="m.url">{{ m.name }}</a>
-      <div class="keywords">
-        {{ m.keywords.join(', ').replaceAll('+', ' ') }}
-      </div>
-      <div class="informations">
-        {{ formatInfoString(m) }}
-      </div>
+      <v-card-title
+        ><a :href="m.url">{{ m.name }}</a></v-card-title
+      >
+      <v-card-subtitle>
+        <div class="keywords">
+          {{ m.keywords.join(', ').replaceAll('+', ' ') }}
+        </div>
+      </v-card-subtitle>
+      <v-card-text>
+        <div class="informations">
+          {{ formatInfoString(m) }}
+        </div>
+        <div class="comment">
+          {{ m.comment }}
+        </div>
+        <div class="rating">
+          {{ formatRating(m) }}
+        </div>
+      </v-card-text>
       <v-card-actions class="d-flex">
         <v-btn icon @click="setState(m, 1)"><v-icon>mdi-check</v-icon></v-btn>
         <v-btn icon @click="setState(m, -1)"><v-icon>mdi-delete</v-icon></v-btn>
@@ -78,12 +90,18 @@ export default {
       if (m.bedrooms) str += m.bedrooms + ' sypialni, '
       if (m.livingroom) str += 'salon, '
       if (m.eatplace) str += 'miejsce do jedzenia, '
+      if (m.furnished) str += 'umeblowane, '
       if (m.balcony) str += 'balkon, '
       if (m.basement) str += 'piwnica/komórka, '
+      if (str.length > 2) str = str.substring(0, str.length - 2)
+      return str
+    },
+    formatRating(m) {
+      let str = ''
       if (m.rating) {
+        if (m.rating.kuba != null) str += 'kuba:' + m.rating.kuba + ', '
         if (m.rating.tymek != null) str += 'tymek:' + m.rating.tymek + ', '
         if (m.rating.szymon != null) str += 'szymon:' + m.rating.szymon + ', '
-        if (m.rating.kuba != null) str += 'kuba:' + m.rating.tymek + ', '
       }
       if (str.length > 2) str = str.substring(0, str.length - 2)
       return str
