@@ -13,11 +13,12 @@
       <div class="informations">
         {{ formatInfoString(m) }}
       </div>
-      <div>
+      <v-card-actions class="d-flex">
         <v-btn icon @click="setState(m, 1)"><v-icon>mdi-check</v-icon></v-btn>
         <v-btn icon @click="setState(m, -1)"><v-icon>mdi-delete</v-icon></v-btn>
+        <v-spacer />
         <mieszkania-edit :mieszkanie="m" />
-      </div>
+      </v-card-actions>
     </v-card>
   </div>
 </template>
@@ -92,6 +93,12 @@ export default {
 </script>
 <style scoped lang='scss'>
 .cont {
+  .good {
+    background: #00cc00;
+  }
+  .bin {
+    background: red;
+  }
   .element {
     margin: 5px;
     padding: 10px;
@@ -106,12 +113,5 @@ export default {
       margin: 3px 0;
     }
   }
-}
-
-.good {
-  background: #00cc00;
-}
-.bin {
-  background: red;
 }
 </style>
