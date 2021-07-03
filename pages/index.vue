@@ -114,7 +114,8 @@ export default {
 
 <style scoped lang="scss">
 .navbar {
-  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   button {
     margin: 4px;
