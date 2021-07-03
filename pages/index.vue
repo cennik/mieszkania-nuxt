@@ -6,20 +6,22 @@
         Nowe({{ waitingNum }})
       </v-btn>
       <v-btn :color="binColor" @click="binClick"> Kosz({{ binNum }}) </v-btn>
-      <v-select
-        v-model="page"
-        :items="pages"
-        label="Strona"
-        :value="0"
-        class="pageSelect"
-      ></v-select
-      ><v-select
-        v-model="onPage"
-        :items="[10, 20, 30, 50, 100, 200, 500]"
-        label="Na Stronie"
-        :value="0"
-        class="pageNumSelect"
-      ></v-select>
+      <div class="pageSelectCont d-flex flex-nowrap">
+        <v-select
+          v-model="page"
+          :items="pages"
+          label="Strona"
+          :value="0"
+          class="pageSelect"
+        ></v-select
+        ><v-select
+          v-model="onPage"
+          :items="[10, 20, 30, 50, 100, 200, 500]"
+          label="Na Stronie"
+          :value="0"
+          class="pageNumSelect"
+        ></v-select>
+      </div>
     </v-app-bar>
     <mieszkania-list :mieszkania="mieszkaniaArray" class="listM" />
   </div>
@@ -121,12 +123,13 @@ export default {
 .listM {
   margin-top: 60px;
 }
-.pageSelect {
+.pageSelectCont {
   margin-top: 30px;
+}
+.pageSelect {
   width: 50px;
 }
 .pageNumSelect {
-  margin-top: 30px;
   width: 70px;
 }
 </style>
