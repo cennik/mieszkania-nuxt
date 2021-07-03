@@ -1,13 +1,27 @@
 <template>
   <div class="main">
-    <v-app-bar class="navbar">
+    <v-app-bar fixed class="navbar">
       <v-btn :color="goodColor" @click="goodClick"> Git({{ goodNum }}) </v-btn>
       <v-btn :color="waitingColor" @click="waitingClick">
         Nowe({{ waitingNum }})
       </v-btn>
       <v-btn :color="binColor" @click="binClick"> Kosz({{ binNum }}) </v-btn>
+      <v-select
+        v-model="page"
+        :items="pages"
+        label="Strona"
+        :value="0"
+        class="pageSelect"
+      ></v-select
+      ><v-select
+        v-model="onPage"
+        :items="[10, 20, 30, 50, 100, 200, 500]"
+        label="Na Stronie"
+        :value="0"
+        class="pageNumSelect"
+      ></v-select>
     </v-app-bar>
-    <mieszkania-list :good="good" :waiting="waiting" :bin="bin" />
+    <mieszkania-list :mieszkania="mieszkaniaArray" class="listM" />
   </div>
 </template>
 
@@ -22,12 +36,38 @@ export default {
       good: false,
       waiting: true,
       bin: false,
+      page: 0,
+      onPage: 10,
     }
   },
   computed: {
     ...mapGetters({
       mieszkania: 'mieszkania/mieszkania',
     }),
+    mieszkaniaArray() {
+      return Object.values(this.mieszkania)
+        .filter((e) => {
+          if (this.good && e.state === 1) return true
+          if (this.bin && e.state === -1) return true
+          if (this.waiting && e.state === 0) return true
+          return false
+        })
+        .slice(this.page * this.onPage, (this.page + 1) * this.onPage)
+    },
+    mieszkaniaLength() {
+      return Object.values(this.mieszkania).filter((e) => {
+        if (this.good && e.state === 1) return true
+        if (this.bin && e.state === -1) return true
+        if (this.waiting && e.state === 0) return true
+        return false
+      }).length
+    },
+    pages() {
+      const x = [0]
+      for (let i = 1; i <= (this.mieszkaniaLength - 1) / this.onPage; i++)
+        x.push(i)
+      return x
+    },
     goodColor() {
       return this.good ? '#00cc00' : ''
     },
@@ -45,6 +85,14 @@ export default {
     },
     binNum() {
       return Object.values(this.mieszkania).filter((e) => e.state === -1).length
+    },
+  },
+  watch: {
+    mieszkaniaLength(v) {
+      this.page = Math.min(
+        this.page,
+        Math.max(0, Math.floor((v - 1) / this.onPage))
+      )
     },
   },
   methods: {
@@ -69,5 +117,16 @@ export default {
   button {
     margin: 4px;
   }
+}
+.listM {
+  margin-top: 60px;
+}
+.pageSelect {
+  margin-top: 30px;
+  width: 50px;
+}
+.pageNumSelect {
+  margin-top: 30px;
+  width: 70px;
 }
 </style>

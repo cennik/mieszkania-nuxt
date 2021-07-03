@@ -137,6 +137,9 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.socket = this.$nuxtSocket({ persist: true })
+  },
   methods: {
     getShopName() {
       if (this.mieszkanie.shopId === 0) return 'Szybko.pl'
@@ -147,7 +150,7 @@ export default {
       this.visible = !this.visible
     },
     save() {
-      this.$nuxtSocket({}).emit('update', this.newMieszkanie)
+      this.socket.emit('update', this.newMieszkanie)
       this.cancel()
     },
   },

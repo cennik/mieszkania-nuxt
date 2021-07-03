@@ -36,41 +36,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import MieszkaniaEdit from './MieszkaniaEdit.vue'
 
 export default {
   components: { MieszkaniaEdit },
   props: {
-    good: {
-      type: Boolean,
-      default: () => false,
-    },
-    waiting: {
-      type: Boolean,
-      default: () => true,
-    },
-    bin: {
-      type: Boolean,
-      default: () => false,
+    mieszkania: {
+      type: Array,
+      default: () => [],
     },
   },
-  computed: {
-    ...mapGetters({
-      mieszkaniaRaw: 'mieszkania/mieszkania',
-    }),
-    mieszkania() {
-      return Object.values(this.mieszkaniaRaw).filter((e) => {
-        if (this.good && e.state === 1) return true
-        if (this.bin && e.state === -1) return true
-        if (this.waiting && e.state === 0) return true
-        return false
-      })
-    },
+  mounted() {
+    this.socket = this.$nuxtSocket({ persist: true })
   },
   methods: {
     setState(mieszkanie, state) {
-      this.$nuxtSocket({}).emit('update', { ...mieszkanie, state })
+      this.socket.emit('update', {
+        ...mieszkanie,
+        state,
+      })
     },
     formatInfoString(m) {
       let str = ''

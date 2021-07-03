@@ -9,7 +9,7 @@ import { mapMutations } from 'vuex'
 
 export default {
   mounted() {
-    this.socket = this.$nuxtSocket({})
+    this.socket = this.$nuxtSocket({ persist: true })
     this.socket.on('allData', (msg) => {
       const tmp = {}
       msg.forEach((e) => (tmp[e[0]] = e[1]))
