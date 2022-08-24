@@ -54,7 +54,14 @@ export default {
           if (this.waiting && e.state === 0) return true
           return false
         })
-        .slice(this.page * this.onPage, (this.page + 1) * this.onPage)
+        .sort((a, b) => {
+          const priceA = a.price | 0;
+          const priceB = b.price | 0;
+          if(priceA < priceB) return -1;
+          if(priceA > priceB) return 1;
+          return 0;
+        })
+        .slice(this.page * this.onPage, (this.page + 1) * this.onPage);
     },
     mieszkaniaLength() {
       return Object.values(this.mieszkania).filter((e) => {

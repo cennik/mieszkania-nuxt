@@ -48,7 +48,7 @@ export default {
     // module options
     sockets: [{
       name: 'main',
-      url: 'http://etiaro.tk:12345'
+      url: 'http://localhost:3001'
     }]
   },
 
@@ -78,7 +78,7 @@ export default {
   build: {
   },
   server: {
-    port: 2137,
+    port: 3000,
     host: '0.0.0.0'
   }
 }
